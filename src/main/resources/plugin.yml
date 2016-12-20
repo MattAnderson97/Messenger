@@ -1,0 +1,11 @@
+name: ${name}
+main: ${groupId}.${artifactId}.${name}
+version: ${version}
+author: ${author}
+commands:
+  message:
+    description: Send a message to a player.
+    aliases: [msg, m, tell, t, whisper, w, pm]
+  reply:
+    description: Reply to a player.
+    aliases: [r]

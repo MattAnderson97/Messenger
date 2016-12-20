@@ -1,0 +1,8 @@
+space\wolv\messenger\events\OnPlayerQuit.class
+space\wolv\messenger\Jsonify.class
+space\wolv\messenger\Messenger.class
+space\wolv\messenger\Utils.class
+space\wolv\messenger\SendMessage.class
+space\wolv\messenger\commands\ReplyCmd.class
+space\wolv\messenger\commands\MsgCmd.class
+space\wolv\messenger\Messaging.class
