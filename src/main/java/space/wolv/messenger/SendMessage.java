@@ -54,7 +54,6 @@ public class SendMessage
 
                         if (otherStaffFound)
                         {
-                            onlineStaff.addExtra("\n");
                             Messaging.send(player, "&b&oOther staff online (click a name to send a message):");
                             Messaging.send(player, onlineStaff);
                         }
