@@ -11,7 +11,7 @@
     <properties>
         <name>Messenger</name>
         <author>Wolveh</author>
-        <spigot-api-ver>1.11-R0.1-SNAPSHOT</spigot-api-ver>
+        <spigot-api-ver>1.11.2-R0.1-SNAPSHOT</spigot-api-ver>
     </properties>
 
     <repositories>
