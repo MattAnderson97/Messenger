@@ -9,3 +9,5 @@ commands:
   reply:
     description: Reply to a player.
     aliases: [r]
+  messenger:
+    description: Get help for the plugin.

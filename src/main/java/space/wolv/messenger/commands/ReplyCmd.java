@@ -33,8 +33,8 @@ public class ReplyCmd implements CommandExecutor
 
                 if (recipient == null)
                 {
-                    Messaging.send(player, "&cYou have no one to reply to");
-                    return false;
+                    Messaging.send(player, "&cYou have no one to reply to.");
+                    return true;
                 }
 
                 SendMessage.sendMessage(player, recipient, message);
@@ -48,7 +48,7 @@ public class ReplyCmd implements CommandExecutor
         }
         else
         {
-            Messaging.send(player, "&cYou have no one to reply to");
+            Messaging.send(player, "&cYou have no one to reply to.");
             return true;
         }
 

@@ -1,7 +1,7 @@
 package space.wolv.messenger;
 
-import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
+import space.wolv.messenger.commands.HelpCmd;
 import space.wolv.messenger.commands.MsgCmd;
 import space.wolv.messenger.commands.ReplyCmd;
 import space.wolv.messenger.events.OnPlayerQuit;
@@ -22,6 +22,7 @@ public class Messenger extends JavaPlugin
 
         this.getCommand("message").setExecutor(new MsgCmd());
         this.getCommand("reply").setExecutor(new ReplyCmd());
+        this.getCommand("messenger").setExecutor(new HelpCmd());
     }
 
     @Override
