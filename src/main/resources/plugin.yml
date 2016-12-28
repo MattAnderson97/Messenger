@@ -20,6 +20,8 @@ commands:
     messenger.*:
       default: op
       children:
+        messenger.staff:
+          default: op
         messenger.spy:
           default: op
         messenger.color:
