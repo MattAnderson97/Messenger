@@ -4,6 +4,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import space.wolv.messenger.DataTypes;
 import space.wolv.messenger.Messaging;
 import space.wolv.messenger.SendMessage;
 import space.wolv.messenger.Utils;
@@ -23,11 +24,11 @@ public class ReplyCmd implements CommandExecutor
 
         Player player = (Player) sender;
 
-        if (hash.containsKey(player.getUniqueId().toString() + ".reply"))
+        if (hash.containsKey(player.getUniqueId().toString() + "." + DataTypes.REPLY.toString()))
         {
             if (args.length >= 1)
             {
-                String recipientName = hash.get(player.getUniqueId().toString() + ".reply");
+                String recipientName = hash.get(player.getUniqueId().toString() + "." + DataTypes.REPLY.toString());
                 Player recipient = Utils.getPlayerFromString(recipientName);
                 String message = Utils.arrayToString(args);
 

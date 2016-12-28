@@ -7,6 +7,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import static space.wolv.messenger.Messenger.hashBool;
+
 public class SendMessage
 {
     public static void sendMessage(CommandSender sender, Player recipient, String message)
@@ -79,8 +81,10 @@ public class SendMessage
             Messaging.send(player, jsonMsgSender);
             Messaging.send(recipient, jsonMsgRecipient);
 
-            Messenger.hash.put(player.getUniqueId().toString() + ".reply", recipient.getName());
-            Messenger.hash.put(player.getUniqueId().toString() + ".reply", player.getName());
+            Messenger.hash.put(player.getUniqueId().toString() + "." + DataTypes.REPLY.toString(), recipient.getName());
+            Messenger.hash.put(recipient.getUniqueId().toString() + "." + DataTypes.REPLY.toString(), player.getName());
+
+            spy(message, sender, recipient);
         }
         else
         {
@@ -89,5 +93,28 @@ public class SendMessage
             Messaging.send(sender, messageSender);
             Messaging.send(recipient, messageRecipient);
         }
+    }
+
+    private static void spy(String message, CommandSender sender, Player recipient)
+    {
+        String spyMsg = Messaging.colorful("&8(&7" + sender.getName() + " &8&m-->&7 " + recipient.getName() + "&8)&f " + message);
+
+        Messaging.send(spyMsg);
+
+        Bukkit.getOnlinePlayers().forEach(player -> {
+            if (!(sender == player || recipient == player))
+            {
+                if (player.hasPermission("messenger.spy") || player.isOp())
+                {
+                    if (hashBool.containsKey(player.getUniqueId().toString() + "." + DataTypes.SPY.toString()))
+                    {
+                        if (hashBool.get(player.getUniqueId().toString() + "." + DataTypes.SPY.toString()))
+                        {
+                            Messaging.send(player, spyMsg);
+                        }
+                    }
+                }
+            }
+        });
     }
 }

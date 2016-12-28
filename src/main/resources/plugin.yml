@@ -11,3 +11,16 @@ commands:
     aliases: [r]
   messenger:
     description: Get help for the plugin.
+  socialspy:
+    description: Spy on player messages
+    permission: messenger.spy
+    aliases: [msgspy, messagespy]
+
+  permissions:
+    messenger.*:
+      default: op
+      children:
+        messenger.spy:
+          default: op
+        messenger.color:
+          default: op

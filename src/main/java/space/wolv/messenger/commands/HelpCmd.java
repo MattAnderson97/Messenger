@@ -12,6 +12,7 @@ import space.wolv.messenger.Messaging;
 
 public class HelpCmd implements CommandExecutor
 {
+    @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {
         if (sender instanceof Player)
@@ -22,11 +23,14 @@ public class HelpCmd implements CommandExecutor
             TextComponent tooltipLine = Jsonify.tooltip(Messaging.colorful("&7&oHover over a command for more info"), "Just like that!");
             TextComponent msgCmdText = Jsonify.tooltip(Messaging.colorful("  &e- /msg &o<player> <message>"), "Send a message to a player.");
             TextComponent replyCmdText = Jsonify.tooltip(Messaging.colorful("  &e- /reply &o<message>"), "Reply to a message");
+            TextComponent spyCmdText = Jsonify.tooltip(Messaging.colorful("  &e- /socialspy"), "Toggle social spy");
 
             Messaging.send(player, header);
             Messaging.send(player, tooltipLine);
             Messaging.send(player, msgCmdText);
             Messaging.send(player, replyCmdText);
+            if (player.hasPermission("messaging.spy"))
+                Messaging.send(player, spyCmdText);
         }
         else
         {
