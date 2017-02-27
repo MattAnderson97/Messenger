@@ -17,7 +17,7 @@ public class SendMessage
 
         String messageSender;
 
-        if(Messenger.essentials)
+        if(Messenger.hasEssentials())
         {
             Essentials essentials = (Essentials) Bukkit.getServer().getPluginManager().getPlugin("Essentials");
             User user = essentials.getUser(recipient.getName());
@@ -60,7 +60,6 @@ public class SendMessage
                     }
                 }
             }
-
         }
 
         if(sender instanceof Player)

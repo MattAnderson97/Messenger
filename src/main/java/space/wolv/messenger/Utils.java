@@ -1,7 +1,6 @@
 package space.wolv.messenger;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -54,69 +53,5 @@ public class Utils
         }
 
         return null;
-    }
-
-    public static String center(String string)
-    {
-        long width = 0;
-
-        String trim = ChatColor.stripColor(string).trim();
-        for (char c : trim.toCharArray())
-        {
-            width += getWidthChar(c);
-        }
-
-        if (!(320-width>0)) return string;
-
-        long need = (320-width)/8;
-
-        String spaces = "";
-        for(int i = 0; i < need; i++)
-        {
-            spaces += " ";
-        }
-
-        return spaces + string.trim() + spaces.substring(3);
-    }
-
-    private static long getWidthChar(char c)
-    {
-        switch(c) {
-            case '!':
-            case ',':
-            case '.':
-            case ':':
-            case ';':
-            case 'i':
-            case '|':
-            case '\u2022':
-                return 2;
-            case '\'':
-            case '`':
-            case 'l':
-                return 3;
-            case ' ':
-            case 'I':
-            case 't':
-            case 'x':
-                return 4;
-            case '"':
-            case '(':
-            case ')':
-            case '*':
-            case '<':
-            case '>':
-            case '=':
-            case 'f':
-            case 'k':
-            case '{':
-            case '}':
-                return 5;
-            case '~':
-            case '@':
-                return 7;
-            default:
-                return 6;
-        }
     }
 }
