@@ -53,7 +53,7 @@ public class OnPlayerChat implements Listener
 
         if (configData.getFormattingEnabled())
         {
-            message = message.replace("%message%", (!configData.getRequireFormattingPermission() || (configData.getRequireFormattingPermission() && player.hasPermission("chat.formatting"))) ? Messaging.colorful(originalMessage) : originalMessage);
+            message = message.replace("%message%", (!configData.getRequireFormattingPermission() || (configData.getRequireFormattingPermission() && player.hasPermission("chatplus.formatting"))) ? Messaging.colorful(originalMessage) : originalMessage);
         }
         else
         {

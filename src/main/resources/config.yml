@@ -15,7 +15,7 @@ global:
     # default: true
     enableFormatting: true
 
-    # Require players to have permission for chat formatting (chat.formatting)
+    # Require players to have permission for chat formatting (chatplus.formatting)
     # default: false
     requireFormattingPermission: false
 

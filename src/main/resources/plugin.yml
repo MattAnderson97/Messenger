@@ -2,6 +2,9 @@ name: ${name}
 main: ${groupId}.${artifactId}.${name}
 version: ${version}
 author: ${author}
+
+softdepend: [Essentials]
+
 commands:
   message:
     description: Send a message to a player.
@@ -9,7 +12,7 @@ commands:
   reply:
     description: Reply to a player.
     aliases: [r]
-  messenger:
+  chatplus:
     description: Get help for the plugin.
   socialspy:
     description: Spy on player messages
@@ -17,12 +20,12 @@ commands:
     aliases: [msgspy, messagespy]
 
   permissions:
-    messenger.*:
+    chatplus.*:
       default: op
       children:
-        messenger.staff:
+        chatplus.staff:
           default: op
-        messenger.spy:
+        chatplus.spy:
           default: op
-        messenger.color:
+        chatplus.formatting:
           default: op

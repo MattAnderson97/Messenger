@@ -64,7 +64,7 @@ public class ChatPlus extends JavaPlugin
     @Override
     public void onEnable()
     {
-        essentials = (getServer().getPluginManager().isPluginEnabled("Essentials"));
+        essentials = getServer().getPluginManager().isPluginEnabled("Essentials");
         chatPlus = this;
 
         File configFile = new File(getDataFolder(), File.separator + "config.yml");

@@ -32,7 +32,7 @@ public class CoreCmd implements CommandExecutor
                     if (sender.hasPermission("chatplus.version") || sender.isOp())
                     {
                         String ver = ChatPlus.getInstance().getDescription().getVersion();
-                        Messaging.send(sender, "&eMessenger: &fv" + ver);
+                        Messaging.send(sender, "&eChatPlus: &fv" + ver);
                     }
                     else
                         Messaging.send(sender, command.getPermissionMessage());
@@ -58,7 +58,7 @@ public class CoreCmd implements CommandExecutor
         {
             Player player = (Player) sender;
 
-            TextComponent header = Jsonify.tooltip(Messaging.colorful("&eMessenger &6&l>> &f&oHelp"), Messaging.colorful("Made by &eWolveh"));
+            TextComponent header = Jsonify.tooltip(Messaging.colorful("&eChatPlus &6&l>> &f&oHelp"), Messaging.colorful("Made by &eWolveh"));
             TextComponent tooltipLine = Jsonify.tooltip(Messaging.colorful("&7&oHover over a command for more info"), "Just like that!");
             TextComponent msgCmdText = Jsonify.tooltip(Messaging.colorful("  &e- /msg &o<player> <message>"), "Send a message to a player.");
             TextComponent replyCmdText = Jsonify.tooltip(Messaging.colorful("  &e- /reply &o<message>"), "Reply to a message");
@@ -68,12 +68,12 @@ public class CoreCmd implements CommandExecutor
             Messaging.send(player, tooltipLine);
             Messaging.send(player, msgCmdText);
             Messaging.send(player, replyCmdText);
-            if (player.hasPermission("messaging.spy"))
+            if (player.hasPermission("chatplus.spy"))
                 Messaging.send(player, spyCmdText);
         }
         else
         {
-            Messaging.send(sender, "&eMessenger &6>> &fHelp");
+            Messaging.send(sender, "&eChatPlus &6>> &fHelp");
             Messaging.send(sender, "  &e- /msg <player> <message> &f- Send a message to a player");
             Messaging.send(sender, "  &e- /reply <message> &f- Reply to a message");
         }

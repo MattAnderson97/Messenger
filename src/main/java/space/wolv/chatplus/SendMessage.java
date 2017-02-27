@@ -16,14 +16,14 @@ public class SendMessage
         //formatting
         if (configData.getFormattingEnabled())
         {
-            if (!configData.getRequireFormattingPermission() || (sender.hasPermission("chatplus.color") && configData.getRequireFormattingPermission()))
+            if (!configData.getRequireFormattingPermission() || (sender.hasPermission("chatplus.formatting") && configData.getRequireFormattingPermission()))
             {
                 message = Messaging.colorful(message);
             }
         }
 
-        String messageSender = Messaging.colorful("&6(&eme &6&m-->&e " + recipient.getName() + "&6)&f") + message;
-        String messageRecipient = Messaging.colorful("&6(&e" + sender.getName() + " &6&m-->&e me&6)&f") + message;
+        String messageSender = Messaging.colorful("&6(&eme &6&m-->&e " + recipient.getName() + "&6)&f ") + message;
+        String messageRecipient = Messaging.colorful("&6(&e" + sender.getName() + " &6&m-->&e me&6)&f ") + message;
 
         if(ChatPlus.hasEssentials())
         {
@@ -77,11 +77,7 @@ public class SendMessage
             TextComponent jsonMsgSender = Jsonify.tooltip(messageSender, Messaging.colorful("&f&oClick to reply"));
             jsonMsgSender = Jsonify.suggest(jsonMsgSender, "/msg " + recipient.getName() + " ");
 
-            TextComponent jsonMsgRecipient = Jsonify.tooltip(messageRecipient, Messaging.colorful("&f&oClick to reply"));
-            jsonMsgRecipient = Jsonify.suggest(jsonMsgRecipient, "/msg " + sender.getName() + " ");
-
             Messaging.send(player, jsonMsgSender);
-            Messaging.send(recipient, jsonMsgRecipient);
 
             ChatPlus.hash.put(player.getUniqueId().toString() + "." + DataTypes.REPLY.toString(), recipient.getName());
             ChatPlus.hash.put(recipient.getUniqueId().toString() + "." + DataTypes.REPLY.toString(), player.getName());
