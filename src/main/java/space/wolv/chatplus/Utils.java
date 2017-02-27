@@ -1,4 +1,4 @@
-package space.wolv.messenger;
+package space.wolv.chatplus;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

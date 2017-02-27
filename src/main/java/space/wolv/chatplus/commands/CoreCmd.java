@@ -1,13 +1,13 @@
-package space.wolv.messenger.commands;
+package space.wolv.chatplus.commands;
 
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import space.wolv.messenger.Jsonify;
-import space.wolv.messenger.Messaging;
-import space.wolv.messenger.Messenger;
+import space.wolv.chatplus.Jsonify;
+import space.wolv.chatplus.Messaging;
+import space.wolv.chatplus.ChatPlus;
 
 public class CoreCmd implements CommandExecutor
 {
@@ -19,10 +19,20 @@ public class CoreCmd implements CommandExecutor
             switch(args[0])
             {
                 case "reload":
-                    if (sender.hasPermission("messenger.reload") || sender.isOp())
+                    if (sender.hasPermission("chatplus.reload") || sender.isOp())
                     {
-                        Messenger.reloadData();
+                        ChatPlus.reloadData();
                         Messaging.send(sender, "&eMessenger &6&l>> &f&oConfig reloaded");
+                    }
+                    else
+                        Messaging.send(sender, command.getPermissionMessage());
+                    break;
+
+                case "version":
+                    if (sender.hasPermission("chatplus.version") || sender.isOp())
+                    {
+                        String ver = ChatPlus.getInstance().getDescription().getVersion();
+                        Messaging.send(sender, "&eMessenger: &fv" + ver);
                     }
                     else
                         Messaging.send(sender, command.getPermissionMessage());

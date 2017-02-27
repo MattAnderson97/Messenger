@@ -1,4 +1,4 @@
-package space.wolv.messenger;
+package space.wolv.chatplus;
 
 public enum DataTypes
 {

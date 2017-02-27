@@ -1,4 +1,4 @@
-package space.wolv.messenger.events;
+package space.wolv.chatplus.events;
 
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
@@ -9,8 +9,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
-import space.wolv.messenger.Messaging;
-import space.wolv.messenger.Messenger;
+import space.wolv.chatplus.Messaging;
+import space.wolv.chatplus.ChatPlus;
 
 
 public class OnPlayerChat implements Listener
@@ -22,7 +22,7 @@ public class OnPlayerChat implements Listener
         Player player = event.getPlayer();
         String message = stripJson(event.getMessage());
 
-        Messenger.ConfigData configData = Messenger.getConfigData();
+        ChatPlus.ConfigData configData = ChatPlus.getConfigData();
 
         if (configData.getCustomChatEnabled())
         {
@@ -45,7 +45,7 @@ public class OnPlayerChat implements Listener
         }
     }
 
-    private String getVars(String message, Player player, String originalMessage, Messenger.ConfigData configData)
+    private String getVars(String message, Player player, String originalMessage, ChatPlus.ConfigData configData)
     {
         message = message.replace("%player-name%", player.getName());
         message = message.replace("%display-name%", player.getDisplayName());

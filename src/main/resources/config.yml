@@ -1,3 +1,13 @@
+
+#  ______ __           __   ______ __
+# |      |  |--.---.-.|  |_|   __ \  |.--.--.-----.
+# |   ---|     |  _  ||   _|    __/  ||  |  |__ --|
+# |______|__|__|___._||____|___|  |__||_____|_____|
+#
+#          Advanced chat for beginners
+#                   By Wolveh
+#
+
 # global options
 global:
     # Allow chat formatting in player's messages
@@ -8,6 +18,10 @@ global:
     # Require players to have permission for chat formatting (chat.formatting)
     # default: false
     requireFormattingPermission: false
+
+    # Detect urls in messages (not yet implemented)
+    # default: true
+    autoDetectUrls: true
 
 
 # chat functionality
@@ -41,7 +55,3 @@ chat:
     #
     # default: "%player-name%: %message%"
     outputSyntax: "%player-name%: %message%"
-
-    # Detect urls in messages
-    # default: true
-    autoDetectUrls: true

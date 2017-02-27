@@ -13,7 +13,7 @@ commands:
     description: Get help for the plugin.
   socialspy:
     description: Spy on player messages
-    permission: messenger.spy
+    permission: chatplus.spy
     aliases: [msgspy, messagespy]
 
   permissions:

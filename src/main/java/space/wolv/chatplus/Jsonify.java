@@ -1,4 +1,4 @@
-package space.wolv.messenger;
+package space.wolv.chatplus;
 
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;

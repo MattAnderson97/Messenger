@@ -1,18 +1,18 @@
-package space.wolv.messenger;
+package space.wolv.chatplus;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
-import space.wolv.messenger.commands.CoreCmd;
-import space.wolv.messenger.commands.MsgCmd;
-import space.wolv.messenger.commands.ReplyCmd;
-import space.wolv.messenger.commands.SpyCmd;
-import space.wolv.messenger.events.OnPlayerChat;
-import space.wolv.messenger.events.OnPlayerQuit;
+import space.wolv.chatplus.commands.CoreCmd;
+import space.wolv.chatplus.commands.MsgCmd;
+import space.wolv.chatplus.commands.ReplyCmd;
+import space.wolv.chatplus.commands.SpyCmd;
+import space.wolv.chatplus.events.OnPlayerChat;
+import space.wolv.chatplus.events.OnPlayerQuit;
 
 import java.io.File;
 import java.util.HashMap;
 
-public class Messenger extends JavaPlugin
+public class ChatPlus extends JavaPlugin
 {
     public static class ConfigData
     {
@@ -33,19 +33,9 @@ public class Messenger extends JavaPlugin
             return formattingEnabled;
         }
 
-        public void setFormattingEnabled(boolean value)
-        {
-            formattingEnabled = value;
-        }
-
         public boolean getRequireFormattingPermission()
         {
             return requireFormattingPermission;
-        }
-
-        public void setRequireFormattingPermission(boolean value)
-        {
-            requireFormattingPermission = value;
         }
 
         public boolean getCustomChatEnabled()
@@ -53,29 +43,14 @@ public class Messenger extends JavaPlugin
             return customChatEnabled;
         }
 
-        public void setCustomChatEnabled(boolean value)
-        {
-            customChatEnabled = value;
-        }
-
         public boolean getChatJsonEnabled()
         {
             return chatJsonEnabled;
         }
 
-        public void setChatJsonEnabled(boolean value)
-        {
-            chatJsonEnabled = value;
-        }
-
         public String getNewMessageRaw()
         {
             return newMessageRaw;
-        }
-
-        public void setNewMessageRaw(String value)
-        {
-            newMessageRaw = value;
         }
     }
 
@@ -84,13 +59,13 @@ public class Messenger extends JavaPlugin
     private static boolean essentials;
     private static FileConfiguration config;
     private static ConfigData configData;
-    private static Messenger messenger;
+    private static ChatPlus chatPlus;
 
     @Override
     public void onEnable()
     {
         essentials = (getServer().getPluginManager().isPluginEnabled("Essentials"));
-        messenger = this;
+        chatPlus = this;
 
         File configFile = new File(getDataFolder(), File.separator + "config.yml");
 
@@ -107,7 +82,7 @@ public class Messenger extends JavaPlugin
 
         this.getCommand("message").setExecutor(new MsgCmd());
         this.getCommand("reply").setExecutor(new ReplyCmd());
-        this.getCommand("messenger").setExecutor(new CoreCmd());
+        this.getCommand("chatplus").setExecutor(new CoreCmd());
         this.getCommand("socialspy").setExecutor(new SpyCmd());
     }
 
@@ -124,8 +99,8 @@ public class Messenger extends JavaPlugin
 
     public static void reloadData()
     {
-        messenger.reloadConfig();
-        config = messenger.getConfig();
+        chatPlus.reloadConfig();
+        config = chatPlus.getConfig();
         loadConfigData();
     }
 
@@ -137,12 +112,16 @@ public class Messenger extends JavaPlugin
         boolean customChatEnabled = config.getBoolean("chat.customChatEnabled");
         boolean chatJsonEnabled = config.getBoolean("chat.enableJson");
 
-        configData = null;
         configData = new ConfigData(newMessageRaw, formattingEnabled, requireFormattingPermission, customChatEnabled, chatJsonEnabled);
     }
 
     public static ConfigData getConfigData()
     {
         return configData;
+    }
+
+    public static ChatPlus getInstance()
+    {
+        return chatPlus;
     }
 }

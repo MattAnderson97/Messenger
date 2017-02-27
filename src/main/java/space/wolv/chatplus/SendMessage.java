@@ -1,4 +1,4 @@
-package space.wolv.messenger;
+package space.wolv.chatplus;
 
 import com.earth2me.essentials.Essentials;
 import com.earth2me.essentials.User;
@@ -11,12 +11,12 @@ public class SendMessage
 {
     public static void sendMessage(CommandSender sender, Player recipient, String message)
     {
-        Messenger.ConfigData configData = Messenger.getConfigData();
+        ChatPlus.ConfigData configData = ChatPlus.getConfigData();
 
         //formatting
         if (configData.getFormattingEnabled())
         {
-            if (!configData.getRequireFormattingPermission() || (sender.hasPermission("messenger.color") && configData.getRequireFormattingPermission()))
+            if (!configData.getRequireFormattingPermission() || (sender.hasPermission("chatplus.color") && configData.getRequireFormattingPermission()))
             {
                 message = Messaging.colorful(message);
             }
@@ -25,7 +25,7 @@ public class SendMessage
         String messageSender = Messaging.colorful("&6(&eme &6&m-->&e " + recipient.getName() + "&6)&f") + message;
         String messageRecipient = Messaging.colorful("&6(&e" + sender.getName() + " &6&m-->&e me&6)&f") + message;
 
-        if(Messenger.hasEssentials())
+        if(ChatPlus.hasEssentials())
         {
             Essentials essentials = (Essentials) Bukkit.getServer().getPluginManager().getPlugin("Essentials");
             User user = essentials.getUser(recipient.getName());
@@ -35,7 +35,7 @@ public class SendMessage
 
                 if (sender instanceof Player)
                 {
-                    if (recipient.isOp() || recipient.hasPermission("messenger.staff"))
+                    if (recipient.isOp() || recipient.hasPermission("chatplus.staff"))
                     {
                         Player player = (Player) sender;
 
@@ -45,7 +45,7 @@ public class SendMessage
 
                         for (Player loopPlayer : Bukkit.getOnlinePlayers())
                         {
-                            if (loopPlayer.isOp() || loopPlayer.hasPermission("messenger.staff"))
+                            if (loopPlayer.isOp() || loopPlayer.hasPermission("chatplus.staff"))
                             {
                                 if (!loopPlayer.equals(recipient))
                                 {
@@ -83,8 +83,8 @@ public class SendMessage
             Messaging.send(player, jsonMsgSender);
             Messaging.send(recipient, jsonMsgRecipient);
 
-            Messenger.hash.put(player.getUniqueId().toString() + "." + DataTypes.REPLY.toString(), recipient.getName());
-            Messenger.hash.put(recipient.getUniqueId().toString() + "." + DataTypes.REPLY.toString(), player.getName());
+            ChatPlus.hash.put(player.getUniqueId().toString() + "." + DataTypes.REPLY.toString(), recipient.getName());
+            ChatPlus.hash.put(recipient.getUniqueId().toString() + "." + DataTypes.REPLY.toString(), player.getName());
 
             spy(message, sender, recipient);
         }
@@ -109,11 +109,11 @@ public class SendMessage
         Bukkit.getOnlinePlayers().forEach(player -> {
             if (!(sender == player || recipient == player))
             {
-                if (player.hasPermission("messenger.spy") || player.isOp())
+                if (player.hasPermission("chatplus.spy") || player.isOp())
                 {
-                    if (Messenger.hashBool.containsKey(player.getUniqueId().toString() + "." + DataTypes.SPY.toString()))
+                    if (ChatPlus.hashBool.containsKey(player.getUniqueId().toString() + "." + DataTypes.SPY.toString()))
                     {
-                        if (Messenger.hashBool.get(player.getUniqueId().toString() + "." + DataTypes.SPY.toString()))
+                        if (ChatPlus.hashBool.get(player.getUniqueId().toString() + "." + DataTypes.SPY.toString()))
                         {
                             Messaging.send(player, spyMsg);
                         }

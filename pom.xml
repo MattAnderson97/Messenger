@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>space.wolv</groupId>
-    <artifactId>messenger</artifactId>
+    <artifactId>chatplus</artifactId>
     <version>1.0</version>
 
     <properties>
-        <name>Messenger</name>
+        <name>ChatPlus</name>
         <author>Wolveh</author>
         <spigot-api-ver>1.11.2-R0.1-SNAPSHOT</spigot-api-ver>
     </properties>

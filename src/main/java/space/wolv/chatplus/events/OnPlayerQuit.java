@@ -1,12 +1,12 @@
-package space.wolv.messenger.events;
+package space.wolv.chatplus.events;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
-import space.wolv.messenger.Utils;
+import space.wolv.chatplus.Utils;
 
-import static space.wolv.messenger.Messenger.hash;
+import static space.wolv.chatplus.ChatPlus.hash;
 
 public class OnPlayerQuit implements Listener
 {

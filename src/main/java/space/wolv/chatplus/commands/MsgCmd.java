@@ -1,12 +1,12 @@
-package space.wolv.messenger.commands;
+package space.wolv.chatplus.commands;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import space.wolv.messenger.Messaging;
-import space.wolv.messenger.SendMessage;
-import space.wolv.messenger.Utils;
+import space.wolv.chatplus.Messaging;
+import space.wolv.chatplus.SendMessage;
+import space.wolv.chatplus.Utils;
 
 import java.util.Arrays;
 
