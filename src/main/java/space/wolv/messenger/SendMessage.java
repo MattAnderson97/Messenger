@@ -11,9 +11,16 @@ public class SendMessage
 {
     public static void sendMessage(CommandSender sender, Player recipient, String message)
     {
+        Messenger.ConfigData configData = Messenger.getConfigData();
 
-        //color
-        if (sender.hasPermission("messenger.color")) message = Messaging.colorful(message);
+        //formatting
+        if (configData.getFormattingEnabled())
+        {
+            if (!configData.getRequireFormattingPermission() || (sender.hasPermission("messenger.color") && configData.getRequireFormattingPermission()))
+            {
+                message = Messaging.colorful(message);
+            }
+        }
 
         String messageSender = Messaging.colorful("&6(&eme &6&m-->&e " + recipient.getName() + "&6)&f") + message;
         String messageRecipient = Messaging.colorful("&6(&e" + sender.getName() + " &6&m-->&e me&6)&f") + message;

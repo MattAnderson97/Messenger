@@ -1,7 +1,5 @@
 package space.wolv.messenger.commands;
 
-import net.md_5.bungee.api.chat.ComponentBuilder;
-import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -9,11 +7,42 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import space.wolv.messenger.Jsonify;
 import space.wolv.messenger.Messaging;
+import space.wolv.messenger.Messenger;
 
-public class HelpCmd implements CommandExecutor
+public class CoreCmd implements CommandExecutor
 {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
+    {
+        if (args.length >= 1)
+        {
+            switch(args[0])
+            {
+                case "reload":
+                    if (sender.hasPermission("messenger.reload") || sender.isOp())
+                    {
+                        Messenger.reloadData();
+                        Messaging.send(sender, "&eMessenger &6&l>> &f&oConfig reloaded");
+                    }
+                    else
+                        Messaging.send(sender, command.getPermissionMessage());
+                    break;
+
+                case "help":
+                default:
+                    sendHelp(sender);
+                    break;
+            }
+        }
+        else
+        {
+            sendHelp(sender);
+        }
+
+        return true;
+    }
+
+    private void sendHelp(CommandSender sender)
     {
         if (sender instanceof Player)
         {
@@ -38,7 +67,5 @@ public class HelpCmd implements CommandExecutor
             Messaging.send(sender, "  &e- /msg <player> <message> &f- Send a message to a player");
             Messaging.send(sender, "  &e- /reply <message> &f- Reply to a message");
         }
-
-        return true;
     }
 }

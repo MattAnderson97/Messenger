@@ -4,9 +4,7 @@ import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
-import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -17,25 +15,24 @@ import space.wolv.messenger.Messenger;
 
 public class OnPlayerChat implements Listener
 {
-    FileConfiguration config;
 
     @EventHandler
     public void onPlayerChat(AsyncPlayerChatEvent event)
     {
         Player player = event.getPlayer();
-        String message = event.getMessage();
-        config = Messenger.getConfiguration();
+        String message = stripJson(event.getMessage());
 
-        if (config.getBoolean("chat.customChatEnabled"))
+        Messenger.ConfigData configData = Messenger.getConfigData();
+
+        if (configData.getCustomChatEnabled())
         {
             event.setCancelled(true);
 
             TextComponent jsonifiedMessage = new TextComponent();
-            String newMessageRaw = config.getString("chat.outputSyntax");
-            String newMessageColorful = Messaging.colorful(newMessageRaw);
-            String newMessage = getVars(newMessageColorful, player, message);
+            String newMessageColorful = Messaging.colorful(configData.getNewMessageRaw());
+            String newMessage = getVars(newMessageColorful, player, message, configData);
 
-            if (config.getBoolean("chat.enableJson"))
+            if (configData.getChatJsonEnabled())
             {
                 jsonifiedMessage.addExtra(getJson(newMessage));
             }
@@ -48,15 +45,15 @@ public class OnPlayerChat implements Listener
         }
     }
 
-    private String getVars(String message, Player player, String originalMessage)
+    private String getVars(String message, Player player, String originalMessage, Messenger.ConfigData configData)
     {
         message = message.replace("%player-name%", player.getName());
         message = message.replace("%display-name%", player.getDisplayName());
         message = message.replace("%player-world%", player.getWorld().getName());
 
-        if (config.getBoolean("chat.enableFormatting"))
+        if (configData.getFormattingEnabled())
         {
-            message = message.replace("%message%", (!config.getBoolean("chat.requireFormattingPermission") || (config.getBoolean("chat.requireFormattingPermisison") && player.hasPermission("chat.formatting"))) ? Messaging.colorful(originalMessage) : originalMessage);
+            message = message.replace("%message%", (!configData.getRequireFormattingPermission() || (configData.getRequireFormattingPermission() && player.hasPermission("chat.formatting"))) ? Messaging.colorful(originalMessage) : originalMessage);
         }
         else
         {
@@ -73,7 +70,7 @@ public class OnPlayerChat implements Listener
         String[] jsonParts = msg.split("\\{json\\{");
         for (String jsonPart : jsonParts)
         {
-            String[] splitMessage = jsonPart.split("}}}");
+            String[] splitMessage = jsonPart.split("\\}\\}\\}");
 
             for (String messagePart : splitMessage)
             {
@@ -128,12 +125,23 @@ public class OnPlayerChat implements Listener
 
         for (char character : jsonPart.replace(componentType, "").toCharArray())
         {
-            if (character != '{')
+            if (character != '}')
             {
                 jsonComponent += Character.toString(character);
             }
         }
 
         return Messaging.colorful(jsonComponent);
+    }
+
+    private String stripJson(String message)
+    {
+        if (message.contains("{json{"))
+        {
+            message = message.replace("{", " ");
+            message = message.replace("}", " ");
+            message = message.replace("||", " ");
+        }
+        return message;
     }
 }

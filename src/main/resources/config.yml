@@ -1,8 +1,20 @@
+# global options
+global:
+    # Allow chat formatting in player's messages
+    # note: doesn't affect the output syntax
+    # default: true
+    enableFormatting: true
+
+    # Require players to have permission for chat formatting (chat.formatting)
+    # default: false
+    requireFormattingPermission: false
+
+
 # chat functionality
 chat:
     # enable custom chat
-    # default: true
-    customChatEnabled: true
+    # default: false
+    customChatEnabled: false
 
     # this has to be enabled for tooltips, Command executions/suggestions etc.
     # default: true
@@ -33,12 +45,3 @@ chat:
     # Detect urls in messages
     # default: true
     autoDetectUrls: true
-
-    # Allow chat formatting in player's messages
-    # note: doesn't affect the output syntax
-    # default: true
-    enableFormatting: true
-
-    # Require players to have permission for chat formatting (chat.formatting)
-    # default: false
-    requireFormattingPermission: false
