@@ -15,6 +15,7 @@ import java.util.HashMap;
 public class Messenger extends JavaPlugin
 {
     public static HashMap<String, String> hash = new HashMap<>();
+    public static HashMap<String, Boolean> hashBool = new HashMap<>();;
     private static boolean essentials;
     private static FileConfiguration config;
 

@@ -7,8 +7,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import static space.wolv.messenger.Messenger.hashBool;
-
 public class SendMessage
 {
     public static void sendMessage(CommandSender sender, Player recipient, String message)
@@ -106,9 +104,9 @@ public class SendMessage
             {
                 if (player.hasPermission("messenger.spy") || player.isOp())
                 {
-                    if (hashBool.containsKey(player.getUniqueId().toString() + "." + DataTypes.SPY.toString()))
+                    if (Messenger.hashBool.containsKey(player.getUniqueId().toString() + "." + DataTypes.SPY.toString()))
                     {
-                        if (hashBool.get(player.getUniqueId().toString() + "." + DataTypes.SPY.toString()))
+                        if (Messenger.hashBool.get(player.getUniqueId().toString() + "." + DataTypes.SPY.toString()))
                         {
                             Messaging.send(player, spyMsg);
                         }
