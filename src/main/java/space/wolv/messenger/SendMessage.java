@@ -7,15 +7,18 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import static space.wolv.messenger.Messenger.hashBool;
+
 public class SendMessage
 {
     public static void sendMessage(CommandSender sender, Player recipient, String message)
     {
-        String messageRecipient;
-        if (sender.hasPermission("messenger.color")) messageRecipient= Messaging.colorful("&6(&e" + sender.getName() + " &6&m-->&e me&6) &f" + message);
-        else messageRecipient = Messaging.colorful("&6(&e" + sender.getName() + " &6&m-->&e me&6) &f") + message;
 
-        String messageSender;
+        //color
+        if (sender.hasPermission("messenger.color")) message = Messaging.colorful(message);
+
+        String messageSender = Messaging.colorful("&6(&eme &6&m-->&e " + recipient.getName() + "&6)&f") + message;
+        String messageRecipient = Messaging.colorful("&6(&e" + sender.getName() + " &6&m-->&e me&6)&f") + message;
 
         if(Messenger.hasEssentials())
         {
@@ -66,9 +69,6 @@ public class SendMessage
         {
             Player player = (Player) sender;
 
-            if (player.hasPermission("messenger.color")) messageSender = Messaging.colorful("&6(&eme &6&m-->&e " + recipient.getName() + "&6) &f" + message);
-            else messageSender = Messaging.colorful("&6(&eme &6&m-->&e " + recipient.getName() + "&6) &f") + message;
-
             TextComponent jsonMsgSender = Jsonify.tooltip(messageSender, Messaging.colorful("&f&oClick to reply"));
             jsonMsgSender = Jsonify.suggest(jsonMsgSender, "/msg " + recipient.getName() + " ");
 
@@ -78,15 +78,43 @@ public class SendMessage
             Messaging.send(player, jsonMsgSender);
             Messaging.send(recipient, jsonMsgRecipient);
 
-            Messenger.hash.put(player.getUniqueId().toString() + ".reply", recipient.getName());
-            Messenger.hash.put(player.getUniqueId().toString() + ".reply", player.getName());
+            Messenger.hash.put(player.getUniqueId().toString() + "." + DataTypes.REPLY.toString(), recipient.getName());
+            Messenger.hash.put(recipient.getUniqueId().toString() + "." + DataTypes.REPLY.toString(), player.getName());
+
+            spy(message, sender, recipient);
         }
         else
         {
             messageSender = Messaging.colorful("&6[&eMSG&6] &fTO " + recipient.getName() + ": &r" + message);
-
             Messaging.send(sender, messageSender);
-            Messaging.send(recipient, messageRecipient);
         }
+
+        TextComponent jsonMsgRecipient = Jsonify.tooltip(messageRecipient, Messaging.colorful("&f&oClick to reply"));
+        jsonMsgRecipient = Jsonify.suggest(jsonMsgRecipient, "/msg " + sender.getName() + " ");
+
+        Messaging.send(recipient, jsonMsgRecipient);
+    }
+
+    private static void spy(String message, CommandSender sender, Player recipient)
+    {
+        String spyMsg = Messaging.colorful("&8(&7" + sender.getName() + " &8&m-->&7 " + recipient.getName() + "&8)&f " + message);
+
+        Messaging.send(spyMsg);
+
+        Bukkit.getOnlinePlayers().forEach(player -> {
+            if (!(sender == player || recipient == player))
+            {
+                if (player.hasPermission("messenger.spy") || player.isOp())
+                {
+                    if (hashBool.containsKey(player.getUniqueId().toString() + "." + DataTypes.SPY.toString()))
+                    {
+                        if (hashBool.get(player.getUniqueId().toString() + "." + DataTypes.SPY.toString()))
+                        {
+                            Messaging.send(player, spyMsg);
+                        }
+                    }
+                }
+            }
+        });
     }
 }

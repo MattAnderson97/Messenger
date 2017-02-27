@@ -9,3 +9,20 @@ commands:
   reply:
     description: Reply to a player.
     aliases: [r]
+  messenger:
+    description: Get help for the plugin.
+  socialspy:
+    description: Spy on player messages
+    permission: messenger.spy
+    aliases: [msgspy, messagespy]
+
+  permissions:
+    messenger.*:
+      default: op
+      children:
+        messenger.staff:
+          default: op
+        messenger.spy:
+          default: op
+        messenger.color:
+          default: op
