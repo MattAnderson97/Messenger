@@ -10,48 +10,58 @@
 
 # global options
 global:
-    # Allow chat formatting in player's messages
+    # Allow formatting in player's messages and chat
     # note: doesn't affect the output syntax
     # default: true
     enableFormatting: true
 
-    # Require players to have permission for chat formatting (chatplus.formatting)
+    # Require players to have permission for chat and message formatting (chatplus.formatting)
     # default: false
     requireFormattingPermission: false
 
-    # Detect urls in messages (not yet implemented)
+    # Detect urls in messages/chat
     # default: true
-    autoDetectUrls: true
+    detectUrls: true
 
 
 # chat functionality
 chat:
     # enable custom chat
-    # default: false
-    customChatEnabled: false
+    # default: true
+    customChatEnabled: true
+
+    # Detect hashtags in chat
+    # default: true
+    detectHashTags: true
+
+    # Detect player tags in chat
+    # default: true
+    detectPlayerTags: true
 
     # this has to be enabled for tooltips, Command executions/suggestions etc.
     # default: true
     enableJson: true
 
-    # output variables:
-    #
-    # %display-name% - Player's display name e.g. name set by /nick (can sometimes include prefixes, depending on permissions manager/prefix manager)
-    # %player-name% - Player's actual name
-    # %player-world% - Player's current world
-    # %message% - original chat message
-    #
-    # {json{<string to add json to>||<json component>}} - add json to the message
-    #     available json components:
-    #     ttp{<String for tooltip>} - tooltip
-    #     run{<Command to run>} - make player run a command
-    #     sgt{<Command to suggest>} - Suggest a command for the player (insert it into their chat box)
-    #     url{<url>} - Add a url
-    #     can add multiple json components to the json entry with "||" then the component
-    # note: enableJson must be enabled for this to work
-    #
+    #Custom chat style
+
+    # variables
+    #     %player%         - player name
+    #     %displayname%    - player's display name
+    #     %message%        - chat message
+    #     %prefix%         - player's prefix
+
+    # if json is enabled, the following variables can be used:
+    #     %ttp: '<tooltip message>'%      - tooltip
+    #     %cmd: '<command>'%              - run a command
+    #     %sgt: '<command suggestion>'%   - suggest a command
+    #     %url: '<url>'%                  - open a url
+    # you can also nest other variables in the json variables
+
+    # all  json variables are assigned to the text block they're in
+    # text blocks can be split with '||'
+
     # example:
-    #     "{json{%display-name% >>||ttp{%player-name%\n&6&m--+|+--\n&eWorld: &f%player-world%}}} %message%"
-    #
-    # default: "%player-name%: %message%"
-    outputSyntax: "%player-name%: %message%"
+    # "%displayname% %ttp: '%player%'% || %message% %cmd: '/msg %player% '%"
+
+    # default: "%player%: %message%"
+    chatStyle: "%player%: %message%"
