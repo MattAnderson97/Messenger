@@ -44,13 +44,6 @@
             <version>${spigot-api-ver}</version>
             <scope>provided</scope>
         </dependency>
-        <!-- Essentials -->
-        <dependency>
-            <groupId>net.ess3</groupId>
-            <artifactId>Essentials</artifactId>
-            <version>Pre2.13.1.7</version>
-            <scope>provided</scope>
-        </dependency>
     </dependencies>
 
     <build>

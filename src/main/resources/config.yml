@@ -28,7 +28,7 @@ global:
 chat:
     # enable custom chat
     # default: true
-    customChatEnabled: true
+    enableCustomChat: true
 
     # Detect hashtags in chat
     # default: true
@@ -50,18 +50,14 @@ chat:
     #     %message%        - chat message
     #     %prefix%         - player's prefix
 
-    # if json is enabled, the following variables can be used:
-    #     %ttp: '<tooltip message>'%      - tooltip
-    #     %cmd: '<command>'%              - run a command
-    #     %sgt: '<command suggestion>'%   - suggest a command
-    #     %url: '<url>'%                  - open a url
-    # you can also nest other variables in the json variables
-
-    # all  json variables are assigned to the text block they're in
-    # text blocks can be split with '||'
+    # if json is enabled, you can add json elements with the following tags:
+    #  ttp: <tooltip message>
+    #  cmd: <command>
+    #  sgt: <command suggestion>
+    #  url: <url>
+    # all json and text is split with '||'
 
     # example:
-    # "%displayname% %ttp: '%player%'% || %message% %cmd: '/msg %player% '%"
-
+    # "%displayname% || ttp: %player% || %message% || sgt: /msg %player% "
     # default: "%player%: %message%"
     chatStyle: "%player%: %message%"
